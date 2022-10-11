@@ -47,6 +47,7 @@ func (u *LimitedGoroutineUnion) Execute(worker WorkerFunc, data WorkerData) {
 	for !empty {
 		if u.WorkerCount < u.MaxWorker && len(u.PendingWorker) > 0 {
 			j := u.PendingWorker[0]
+			u.WorkerCount += 1
 			u.PendingWorker = u.PendingWorker[1:]
 			j <- true
 		} else {
