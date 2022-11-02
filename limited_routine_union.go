@@ -2,19 +2,6 @@ package uniongo
 
 import "sync"
 
-type GoroutineUnion struct {
-}
-
-func NewGoroutineUnion() Union {
-	return &GoroutineUnion{}
-}
-
-func (u *GoroutineUnion) Execute(worker WorkerFunc, data WorkerData) {
-	go func(data WorkerData) {
-		worker(data)
-	}(data)
-}
-
 type LimitedGoroutineUnion struct {
 	MaxWorker     int
 	Lock          *sync.Mutex
